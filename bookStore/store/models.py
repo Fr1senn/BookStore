@@ -45,6 +45,7 @@ class Author(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=200, verbose_name='Название')
     slug = models.SlugField(max_length=220, verbose_name='URL')
+    description = models.TextField(verbose_name='Описание', null=True, blank=True)
     price = models.DecimalField(max_digits=12, decimal_places=2, verbose_name='Цена')
     genres = models.ManyToManyField(Genre)
     authors = models.ManyToManyField(Author)
