@@ -1,0 +1,43 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}Каталог{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Каталог</h2>
+        <hr>
+        <div class="catalog_inner">
+            <div class="catalog_sidebar">
+                <h3>Жанры</h3>
+                <hr>
+                <div class="genres">
+                    {% for genre in genres %}
+                        <a href="">{{ genre.title }}</a>
+                    {% endfor %}
+                </div>
+                <h3>Авторы</h3>
+                <hr>
+                <div class="authors">
+                    {% for author in authors %}
+                        <a href="">{{ author.first_name }} {{ author.last_name }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="catalog_content">
+                {% for book in books %}
+                    <div class="catalog_item">
+                        <div class="item_img-wrapper">
+                            <img src="{% static 'store/images/book_icon.svg' %}" alt="">
+                        </div>
+                        <div class="item_content-wrapper">
+                            <h2>{{ book.title|truncatewords:2 }}</h2>
+                            <hr>
+                            <p>{{ book.description|truncatewords:30 }}</p>
+                            <p>{{ book.price }} ₴</p>
+                            <a href="">Подробнее...</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
