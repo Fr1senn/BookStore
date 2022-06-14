@@ -22,8 +22,8 @@ class AuthorAdmin(admin.ModelAdmin):
 @admin.register(models.Book)
 class BookAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
-    fields = ('title', 'price', 'genres', 'authors', 'slug')
-    list_display = ('id', 'title', 'price', 'get_genres', 'get_authors')
+    fields = ('title', 'description', 'price', 'genres', 'authors', 'slug')
+    list_display = ('id', 'title', 'description', 'price', 'get_genres', 'get_authors')
     list_display_links = ('title',)
     list_filter = ('genres', 'authors', 'price')
 
