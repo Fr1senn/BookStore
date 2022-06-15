@@ -1,5 +1,5 @@
-from django.shortcuts import render
 from django.views.generic import ListView, TemplateView, DetailView, CreateView
+from django.shortcuts import render
 
 from . import models
 
@@ -18,8 +18,8 @@ class ReviewsView(ListView):
 
 class CatalogView(ListView):
     template_name = 'store/catalog.html'
-    context_object_name = 'books'
     model = models.Book
+    context_object_name = 'books'
     paginate_by = 4
 
     def get_context_data(self, **kwargs):
@@ -27,3 +27,19 @@ class CatalogView(ListView):
         context['authors'] = models.Author.objects.all()
         context['genres'] = models.Genre.objects.all()
         return context
+
+
+class BookByGenreView(CatalogView):
+    def get_queryset(self):
+        return models.Book.objects.filter(genres__slug=self.kwargs['slug'])
+
+
+class BookByAuthorView(CatalogView):
+    def get_queryset(self):
+        return models.Book.objects.filter(authors__slug=self.kwargs['slug'])
+
+
+class BookDetail(DetailView):
+    template_name = 'store/book.html'
+    model = models.Book
+    context_object_name = 'book'
