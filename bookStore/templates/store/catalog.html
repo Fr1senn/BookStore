@@ -1,4 +1,4 @@
-{% extends 'store/base.html' %}
+{% extends 'store/base_templates/base.html' %}
 {% load static %}
 {% block title %}Каталог{% endblock %}
 {% block content %}
@@ -11,14 +11,14 @@
                 <hr>
                 <div class="genres">
                     {% for genre in genres %}
-                        <a href="">{{ genre.title }}</a>
+                        <a href="{{ genre.get_absolute_url }}">{{ genre.title }}</a>
                     {% endfor %}
                 </div>
                 <h3>Авторы</h3>
                 <hr>
                 <div class="authors">
                     {% for author in authors %}
-                        <a href="">{{ author.first_name }} {{ author.last_name }}</a>
+                        <a href="{{ author.get_absolute_url }}">{{ author.first_name }} {{ author.last_name }}</a>
                     {% endfor %}
                 </div>
             </div>
@@ -31,38 +31,17 @@
                         <div class="item_content-wrapper">
                             <h2>{{ book.title|truncatewords:2 }}</h2>
                             <hr>
-                            <p>{{ book.description|truncatewords:30 }}</p>
-                            <p>{{ book.price }} ₴</p>
-                            <a href="">Подробнее...</a>
+                            {% if book.description == None %}
+                                <p>Описание отсутствует</p>
+                            {% else %}
+                                <p>{{ book.description|truncatewords:30 }}</p>
+                            {% endif %}
+                            <p><b>Цена:</b> {{ book.price }} ₴</p>
+                            <a href="{{ book.get_absolute_url }}">Подробнее...</a>
                         </div>
                     </div>
                 {% endfor %}
             </div>
         </div>
-        {% if page_obj.has_other_pages %}
-            <div class="paginator">
-                {% if page_obj.has_previous %}
-                    <div class="paginator_item">
-                        <a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
-                    </div>
-                {% endif %}
-                {% for item in page_obj.paginator.page_range %}
-                    {% if page_obj.number == item %}
-                        <div class="paginator_item">
-                            <a style="color: white; background-color: black" href="?page={{ item }}">{{ item }}</a>
-                        </div>
-                    {% elif item >= page_obj.number|add:-2 and item <= page_obj.number|add:2 %}
-                        <div class="paginator_item">
-                            <a href="?page={{ item }}">{{ item }}</a>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-                {% if page_obj.has_next %}
-                    <div class="paginator_item">
-                        <a href="?page={{ page_obj.next_page_number }}">&gt;</a>
-                    </div>
-                {% endif %}
-            </div>
-        {% endif %}
     </div>
 {% endblock %}

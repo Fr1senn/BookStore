@@ -15,7 +15,7 @@
 
 .genres,
 .authors {
-    height: 150px;
+    height: 165px;
     overflow-y: auto;
 }
 
@@ -41,12 +41,16 @@
 }
 
 .item_img-wrapper {
+    display: flex;
+    justify-content: center;
     width: 25%;
 }
 
 .item_img-wrapper img {
-    width: 100%;
-    height: 100%;
+    display: block;
+    margin: auto;
+    width: 75%;
+    height: 75%;
 }
 
 .item_content-wrapper {
