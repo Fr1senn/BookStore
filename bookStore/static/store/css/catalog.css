@@ -53,14 +53,14 @@
     width: 75%;
 }
 
-.item_content-wrapper p{
+.item_content-wrapper p {
     margin: 6px 0;
     text-align: center;
     font-weight: 500;
     font-size: 18px;
 }
 
-.item_content-wrapper a{
+.item_content-wrapper a {
     display: block;
     text-align: center;
     border: 2px solid black;
@@ -72,8 +72,29 @@
     font-size: 20px;
 }
 
-.item_content-wrapper a:hover{
+.item_content-wrapper a:hover {
     transition: .2s;
     background-color: black;
     color: white;
+}
+
+.paginator {
+    display: flex;
+    justify-content: center;
+    width: 25%;
+    margin: 20px auto;
+}
+
+.paginator_item{
+    margin: 0 5px;
+}
+
+.paginator_item:hover{
+    transition: .2s;
+    transform: scale(1.25);
+}
+
+.paginator_item a {
+    padding: 4px 6px;
+    border: 2px solid black;
 }
