@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse_lazy
 
 
 def get_full_name(self):
@@ -26,6 +27,9 @@ class Genre(BaseModel):
         verbose_name_plural = 'Жанры'
         ordering = ['pk']
 
+    def get_absolute_url(self):
+        return reverse_lazy('book_by_genre', kwargs={'slug': self.slug})
+
 
 class Author(models.Model):
     slug = models.SlugField(max_length=220, verbose_name='URL')
@@ -40,6 +44,9 @@ class Author(models.Model):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
+    def get_absolute_url(self):
+        return reverse_lazy('book_by_author', kwargs={'slug': self.slug})
 
 
 class Book(models.Model):
@@ -57,6 +64,9 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse_lazy('book', kwargs={'slug': self.slug})
 
 
 class Order(models.Model):
