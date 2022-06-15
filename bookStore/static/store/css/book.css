@@ -1,0 +1,25 @@
+.book_inner {
+    display: flex;
+}
+
+.book_img-wrapper,
+.book_content-wrapper {
+    width: 50%;
+}
+
+.book_img-wrapper img{
+    width: 100%;
+    height: 100%;
+}
+
+.book_content-wrapper h3{
+    text-align: center;
+    margin: 12px 0;
+    font-size: 24px;
+}
+
+.book_content-wrapper p{
+    text-align: center;
+    font-weight: 500;
+    font-size: 20px;
+}
