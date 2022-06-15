@@ -1,0 +1,32 @@
+{% extends 'store/base_templates/base.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>{{ book.title }}</h2>
+        <hr>
+        <div class="book_inner">
+            <div class="book_img-wrapper">
+                <img src="{% static 'store/images/book_icon.svg' %}" alt="">
+            </div>
+            <div class="book_content-wrapper">
+                <h3>Жанр(ы):</h3>
+                <hr>
+                {% for genre in book.genres.all %}
+                    <p>{{ genre }}</p>
+                {% endfor %}
+                <h3>Автор(ы):</h3>
+                <hr>
+                {% for author in book.authors.all %}
+                    <p>{{ author }}</p>
+                {% endfor %}
+                <h3>Описание:</h3>
+                <hr>
+                <p>{{ book.description }}</p>
+                <h3>Цена:</h3>
+                <hr>
+                <p>{{ book.price }} ₴</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
