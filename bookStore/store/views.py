@@ -1,3 +1,4 @@
+from django.contrib.auth.views import LoginView
 from django.views.generic import ListView, TemplateView, DetailView, CreateView
 from django.shortcuts import render
 
@@ -29,17 +30,21 @@ class CatalogView(ListView):
         return context
 
 
-class BookByGenreView(CatalogView):
-    def get_queryset(self):
-        return models.Book.objects.filter(genres__slug=self.kwargs['slug'])
-
-
 class BookByAuthorView(CatalogView):
     def get_queryset(self):
         return models.Book.objects.filter(authors__slug=self.kwargs['slug'])
+
+
+class BookByGenreView(CatalogView):
+    def get_queryset(self):
+        return models.Book.objects.filter(genres__slug=self.kwargs['slug'])
 
 
 class BookDetail(DetailView):
     template_name = 'store/book.html'
     model = models.Book
     context_object_name = 'book'
+
+
+class LoginView(TemplateView):
+    template_name = 'store/login.html'
