@@ -47,7 +47,7 @@ input {
     font-weight: 500;
 }
 
-button{
+button {
     display: block;
     margin: 10px auto;
     border: 2px solid black;
@@ -59,7 +59,7 @@ button{
     font-size: 18px;
 }
 
-button:hover{
+button:hover {
     transition: .2s;
     background-color: black;
     color: white;
@@ -73,6 +73,18 @@ button:hover{
     max-width: 1300px;
     width: 100%;
     margin: 0 auto;
+}
+
+.errors {
+    width: 50%;
+    border: 1px solid red;
+    margin: 20px auto;
+    padding: 10px 0;
+    background-color: rgba(139, 0, 0);
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
 }
 
 /* HEADER */
