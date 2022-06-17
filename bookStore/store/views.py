@@ -1,8 +1,11 @@
 from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
 from django.views.generic import ListView, TemplateView, DetailView, CreateView
-from django.shortcuts import render
+from django.contrib.auth import logout, login
+from django.shortcuts import render, redirect
 
 from . import models
+from . import forms
 
 
 class HomeView(TemplateView):
@@ -46,5 +49,20 @@ class BookDetail(DetailView):
     context_object_name = 'book'
 
 
-class LoginView(TemplateView):
-    template_name = 'store/login.html'
+class RegistrationView(CreateView):
+    template_name = 'registration/registration.html'
+    form_class = forms.RegistrationForm
+    success_url = reverse_lazy('login')
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('home')
+
+
+class LogInView(LoginView):
+    template_name = 'registration/login.html'
+    form_class = forms.LoginForm
+
+    def get_success_url(self):
+        return reverse_lazy('home')

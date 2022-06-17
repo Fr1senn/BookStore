@@ -1,0 +1,28 @@
+{% extends 'store/base_templates/base.html' %}
+{% block title %}Авторизация{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Авторизация</h2>
+        <hr>
+        <div class="login_inner">
+            <form method="post">
+                {% csrf_token %}
+                {% for item in form %}
+                    {% if item.errors %}
+                        <div class="errors">
+                            {{ item.errors }}
+                        </div>
+                    {% endif %}
+                    <label for="{{ item.id_for_label }}">{{ item.label }}</label>
+                    {{ item }}
+                {% endfor %}
+                <button type="submit">Авторизоваться</button>
+            </form>
+            <p style="text-align:center; margin: 10px 0;">Ещё нет аккаунта?
+                <a style="color: blue; text-decoration:underline;" href="{% url 'registration' %}">
+                    Зарегистрируйтесь!
+                </a>
+            </p>
+        </div>
+    </div>
+{% endblock %}
