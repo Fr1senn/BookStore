@@ -11,5 +11,5 @@ urlpatterns = [
     path('catalog/genre/<slug:slug>/', views.BookByGenreView.as_view(), name='book_by_genre'),
     path('catalog/author/<slug:slug>/', views.BookByAuthorView.as_view(), name='book_by_author'),
 
-    path('login/', views.LoginView.as_view(), name='login'),
+    path('accounts/registration/', views.RegistrationView.as_view(), name='registration'),
 ]
