@@ -30,6 +30,13 @@
     margin: 0 8px;
 }
 
+.genres a:hover,
+.authors a:hover{
+    transition: .2s;
+    color: white;
+    background-color: black;
+}
+
 .catalog_content {
     width: 75%;
 }

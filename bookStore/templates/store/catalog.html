@@ -11,14 +11,25 @@
                 <hr>
                 <div class="genres">
                     {% for genre in genres %}
-                        <a href="{{ genre.get_absolute_url }}">{{ genre.title }}</a>
+                        {% if genre.slug in request.path %}
+                            <a style="color: white; background-color: black"
+                               href="{{ genre.get_absolute_url }}">{{ genre.title }}</a>
+                        {% else %}
+                            <a href="{{ genre.get_absolute_url }}">{{ genre.title }}</a>
+                        {% endif %}
                     {% endfor %}
                 </div>
                 <h3>Авторы</h3>
                 <hr>
                 <div class="authors">
                     {% for author in authors %}
-                        <a href="{{ author.get_absolute_url }}">{{ author.first_name }} {{ author.last_name }}</a>
+                        {% if author.slug in request.path %}
+                            <a style="color: white; background-color: black"
+                               href="{{ author.get_absolute_url }}">{{ author.first_name }} {{ author.last_name }}</a>
+                        {% else %}
+                            <a href="{{ author.get_absolute_url }}">{{ author.first_name }} {{ author.last_name }}</a>
+                        {% endif %}
+
                     {% endfor %}
                 </div>
             </div>
