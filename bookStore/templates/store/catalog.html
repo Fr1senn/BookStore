@@ -36,20 +36,33 @@
             <div class="catalog_content">
                 {% for book in books %}
                     <div class="catalog_item">
-                        <div class="item_img-wrapper">
-                            <img src="{% static 'store/images/book_icon.svg' %}" alt="">
+                        <div style="display:flex;">
+                            <div class="item_img-wrapper">
+                                <img src="{% static 'store/images/book_icon.svg' %}" alt="book_icon">
+                            </div>
+                            <div class="item_content-wrapper">
+                                <h3 style="margin: 10px 0; text-align: center; text-decoration:underline;">
+                                    <a href="{{ book.get_absolute_url }}">{{ book.title }}</a>
+
+                                </h3>
+                                <hr>
+                                <h3 style="margin: 5px 8px;">
+                                    Автор(ы): {% for author in book.authors.all %}
+                                    <span style="font-weight: 500;">{{ author }}</span> {% endfor %}
+                                </h3>
+                                <h3 style="margin: 5px 8px;">
+                                    Жанр(ы): {% for genre in book.genres.all %}
+                                    <span style="font-weight: 500;">{{ genre|lower }}</span>  {% endfor %}
+                                </h3>
+                                <h3 style="margin: 5px 8px;">Цена: <span
+                                        style="font-weight: 500;">{{ book.price }} ₴</span></h3>
+                            </div>
                         </div>
-                        <div class="item_content-wrapper">
-                            <h2>{{ book.title|truncatewords:2 }}</h2>
-                            <hr>
-                            {% if book.description == None %}
-                                <p>Описание отсутствует</p>
-                            {% else %}
-                                <p>{{ book.description|truncatewords:30 }}</p>
-                            {% endif %}
-                            <p><b>Цена:</b> {{ book.price }} ₴</p>
-                            <a href="{{ book.get_absolute_url }}">Подробнее...</a>
-                        </div>
+                        {% if book.description != None %}
+                            <div style="margin: 10px 0;">
+                                <p style="text-align:center;">{{ book.description }}</p>
+                            </div>
+                        {% endif %}
                     </div>
                 {% endfor %}
             </div>
