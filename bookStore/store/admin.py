@@ -34,6 +34,13 @@ class BookAdmin(admin.ModelAdmin):
         return ", ".join([item.last_name for item in obj.authors.all()])
 
 
+@admin.register(models.Order)
+class OrderAdmin(admin.ModelAdmin):
+    fields = ('user', 'book')
+    list_display = ('id', 'user', 'book', 'purchase_date')
+    list_filter = ('user', 'purchase_date')
+
+
 @admin.register(models.Review)
 class ReviewAdmin(admin.ModelAdmin):
     fields = ('text', 'user')
