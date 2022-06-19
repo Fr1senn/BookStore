@@ -1,8 +1,9 @@
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.views.generic import ListView, TemplateView, DetailView, CreateView
-from django.contrib.auth import logout, login
-from django.shortcuts import render, redirect
+from django.contrib.auth import login
+from django.shortcuts import redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from . import models
 from . import forms
@@ -15,6 +16,7 @@ class HomeView(TemplateView):
 class ReviewsView(ListView):
     template_name = 'store/reviews.html'
     context_object_name = 'reviews'
+    paginate_by = 3
 
     def get_queryset(self):
         return models.Review.objects.exclude(user__username='admin')
@@ -66,3 +68,13 @@ class LogInView(LoginView):
 
     def get_success_url(self):
         return reverse_lazy('home')
+
+
+class ProfileView(LoginRequiredMixin, TemplateView):
+    login_url = '/login'
+    template_name = 'store/profile.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['orders'] = models.Order.objects.filter(user__username=self.request.user.username).order_by('purchase_date')
+        return context
