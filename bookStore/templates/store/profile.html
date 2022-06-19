@@ -1,0 +1,55 @@
+{% extends 'store/base_templates/base.html' %}
+{% load static %}
+{% block title %}Кабинет{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Личный кабинет</h2>
+        <hr>
+        <div class="profile_inner">
+            <div class="profile_info">
+                <div class="profile_img-wrapper">
+                    <img src="{% static 'store/images/user_icon.svg' %}" alt="user_icon">
+                </div>
+                <div class="profile_content-wrapper">
+                    <h3 style="text-align:center; margin: 10px;">
+                        {{ user.first_name }} "{{ user.username }}" {{ user.last_name }}
+                    </h3>
+                    <hr>
+                    <h3 style="margin: 5px">
+                        Email: <span>{{ user.email }}</span>
+                    </h3>
+                    <h3 style="margin: 5px">
+                        Дата регистрации: <span>{{ user.date_joined }}</span>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <h2>История покупок</h2>
+        <hr>
+        <div class="orders_inner">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Книга</th>
+                    <th>Цена</th>
+                    <th>Дата покупки</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <th>
+                            <a style="text-decoration:underline; color: blue;" href="{{ order.book.get_absolute_url }}">
+                                {{ order.book }}
+                            </a>
+                        </th>
+                        <th>{{ order.book.price }} ₴</th>
+                        <th>{{ order.purchase_date }}</th>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
