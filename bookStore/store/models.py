@@ -77,6 +77,7 @@ class Order(models.Model):
     class Meta:
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
+        ordering = ['pk']
 
     def __str__(self):
         return f'{self.user} {self.book}'
