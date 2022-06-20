@@ -13,7 +13,7 @@
             <div class="book_content-wrapper">
                 <h3>Жанр(ы): {% for genre in book.genres.all %}<p>{{ genre }}</p>{% endfor %}</h3>
                 <h3>Автор(ы): {% for author in book.authors.all %}<p>{{ author }}</p>{% endfor %}</h3>
-                <h3>Описание: <p>{{ book.description }}</p></h3>
+                <h3>Описание: {% if book.description != None %}<p>{{ book.description }}</p>{% endif %}</h3>
                 <h3>Цена: {{ book.price }} ₴</h3>
             </div>
         </div>

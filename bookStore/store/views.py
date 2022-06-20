@@ -19,14 +19,19 @@ class ReviewsView(ListView):
     paginate_by = 3
 
     def get_queryset(self):
-        return models.Review.objects.exclude(user__username='admin')
+        return models.Review.objects\
+            .select_related('user')\
+            .exclude(user__username='admin')\
+            .values('text', 'writing_date', 'user__first_name', 'user__last_name')
 
 
 class CatalogView(ListView):
     template_name = 'store/catalog.html'
-    model = models.Book
     context_object_name = 'books'
     paginate_by = 4
+
+    def get_queryset(self):
+        return models.Book.objects.all().prefetch_related('genres').prefetch_related('authors')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -37,12 +42,18 @@ class CatalogView(ListView):
 
 class BookByAuthorView(CatalogView):
     def get_queryset(self):
-        return models.Book.objects.filter(authors__slug=self.kwargs['slug'])
+        return models.Book.objects\
+            .filter(authors__slug=self.kwargs['slug'])\
+            .prefetch_related('genres')\
+            .prefetch_related('authors')
 
 
 class BookByGenreView(CatalogView):
     def get_queryset(self):
-        return models.Book.objects.filter(genres__slug=self.kwargs['slug'])
+        return models.Book.objects\
+            .filter(genres__slug=self.kwargs['slug'])\
+            .prefetch_related('genres')\
+            .prefetch_related('authors')
 
 
 class BookDetail(DetailView):
@@ -76,5 +87,7 @@ class ProfileView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['orders'] = models.Order.objects.filter(user__username=self.request.user.username).order_by('purchase_date')
+        context['orders'] = models.Order.objects\
+            .select_related('book')\
+            .filter(user__username=self.request.user.username)
         return context

@@ -40,11 +40,9 @@
                 {% for order in orders %}
                     <tr>
                         <th>
-                            <a style="text-decoration:underline; color: blue;" href="{{ order.book.get_absolute_url }}">
-                                {{ order.book }}
-                            </a>
+                            <a style="text-decoration:underline; color: blue;" href="{{ order.book.get_absolute_url }}">{{ order.book }}</a>
                         </th>
-                        <th>{{ order.book.price }} ₴</th>
+                        <th>{{ order.book }} ₴</th>
                         <th>{{ order.purchase_date }}</th>
                     </tr>
                 {% endfor %}
