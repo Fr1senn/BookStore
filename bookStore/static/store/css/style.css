@@ -47,6 +47,21 @@ input {
     font-weight: 500;
 }
 
+textarea {
+    display: block;
+    margin: 10px auto;
+    border: 2px solid black;
+    font-weight: 500;
+    font-size: 16px;
+    max-width: 1300px;
+}
+
+select{
+    display: block;
+    margin: 10px auto;
+    border: 2px solid black;
+}
+
 button {
     display: block;
     margin: 10px auto;
