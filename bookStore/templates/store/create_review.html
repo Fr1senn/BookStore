@@ -1,0 +1,19 @@
+{% extends 'store/base_templates/base.html' %}
+{% block title %}Оставить отзыв{% endblock %}
+{% block content %}
+    <div class="container">
+            <form method="post">
+                {% csrf_token %}
+                {% for item in form %}
+                    {% if item.errors %}
+                        <div class="errors">
+                            {{ item.errors }}
+                        </div>
+                    {% endif %}
+                    <label for="{{ item.id_for_label }}">{{ item.label }}</label>
+                    {{ item }}
+                {% endfor %}
+                <button type="submit">Отправить</button>
+            </form>
+    </div>
+{% endblock %}

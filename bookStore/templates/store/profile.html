@@ -21,6 +21,9 @@
                     <h3 style="margin: 5px">
                         Дата регистрации: <span>{{ user.date_joined }}</span>
                     </h3>
+                    <a style="text-decoration: underline; color: blue; margin: 5px" href="{% url 'create_review' %}">
+                        Оставить отзыв
+                    </a>
                 </div>
             </div>
         </div>
@@ -40,7 +43,8 @@
                 {% for order in orders %}
                     <tr>
                         <th>
-                            <a style="text-decoration:underline; color: blue;" href="{{ order.book.get_absolute_url }}">{{ order.book }}</a>
+                            <a style="text-decoration:underline; color: blue;"
+                               href="{{ order.book.get_absolute_url }}">{{ order.book }}</a>
                         </th>
                         <th>{{ order.book }} ₴</th>
                         <th>{{ order.purchase_date }}</th>

@@ -19,9 +19,9 @@ class ReviewsView(ListView):
     paginate_by = 3
 
     def get_queryset(self):
-        return models.Review.objects\
-            .select_related('user')\
-            .exclude(user__username='admin')\
+        return models.Review.objects \
+            .select_related('user') \
+            .exclude(user__username='admin') \
             .values('text', 'writing_date', 'user__first_name', 'user__last_name')
 
 
@@ -40,19 +40,30 @@ class CatalogView(ListView):
         return context
 
 
+class CreateReviewView(LoginRequiredMixin, CreateView):
+    template_name = 'store/create_review.html'
+    login_url = '/login'
+    form_class = forms.ReviewForm
+    success_url = reverse_lazy('reviews')
+
+    def form_valid(self, form):
+        form.instance.user_id = self.request.user.id
+        return super(CreateReviewView, self).form_valid(form)
+
+
 class BookByAuthorView(CatalogView):
     def get_queryset(self):
-        return models.Book.objects\
-            .filter(authors__slug=self.kwargs['slug'])\
-            .prefetch_related('genres')\
+        return models.Book.objects \
+            .filter(authors__slug=self.kwargs['slug']) \
+            .prefetch_related('genres') \
             .prefetch_related('authors')
 
 
 class BookByGenreView(CatalogView):
     def get_queryset(self):
-        return models.Book.objects\
-            .filter(genres__slug=self.kwargs['slug'])\
-            .prefetch_related('genres')\
+        return models.Book.objects \
+            .filter(genres__slug=self.kwargs['slug']) \
+            .prefetch_related('genres') \
             .prefetch_related('authors')
 
 
@@ -87,7 +98,7 @@ class ProfileView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['orders'] = models.Order.objects\
-            .select_related('book')\
+        context['orders'] = models.Order.objects \
+            .select_related('book') \
             .filter(user__username=self.request.user.username)
         return context

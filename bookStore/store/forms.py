@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
+from . import models
+
 
 class RegistrationForm(UserCreationForm):
     first_name = forms.CharField(label='Имя', widget=forms.TextInput())
@@ -19,3 +21,11 @@ class RegistrationForm(UserCreationForm):
 class LoginForm(AuthenticationForm):
     username = forms.CharField(label='Имя пользователя', widget=forms.TextInput())
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput())
+
+
+class ReviewForm(forms.ModelForm):
+    text = forms.CharField(label='Отзыв', widget=forms.Textarea())
+
+    class Meta:
+        model = models.Review
+        fields = ('text',)
