@@ -12,7 +12,7 @@
                         <img src="{% static 'store/images/user_icon.svg' %}" alt="user_icon">
                     </div>
                     <div class="review_content-wrapper">
-                        <h3>{{ review.user }}</h3>
+                        <h3>{{ review.user__first_name }} {{ review.user__last_name }}</h3>
                         <h6>{{ review.writing_date|date:'d F Y H:i'|lower }}</h6>
                         <p>{{ review.text }}</p>
                     </div>
