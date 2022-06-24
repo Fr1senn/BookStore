@@ -8,10 +8,6 @@ from django.views.generic import CreateView, DetailView, ListView, TemplateView
 from . import forms, models
 
 
-class HomeView(TemplateView):
-    template_name = 'store/index.html'
-
-
 class ReviewsView(ListView):
     template_name = 'store/reviews.html'
     context_object_name = 'reviews'
@@ -101,3 +97,15 @@ class ProfileView(LoginRequiredMixin, TemplateView):
             .select_related('book') \
             .filter(user__username=self.request.user.username)
         return context
+
+
+class SearchView(ListView):
+    template_name = 'store/search_results.html'
+    model = models.Book
+    context_object_name = 'books'
+
+    def get_queryset(self):
+        return models.Book.objects\
+            .filter(title__icontains=self.request.GET.get('search_input'))\
+            .prefetch_related('genres')\
+            .prefetch_related('authors')
