@@ -60,3 +60,16 @@
 .item_content-wrapper {
     width: 50%;
 }
+
+.searchbar_wrapper{
+    display: flex;
+    margin: 10px 0;
+}
+
+.searchbar_wrapper input{
+    width: 75%;
+}
+
+.searchbar_wrapper button{
+    width: 25%;
+}
