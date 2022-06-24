@@ -1,0 +1,9 @@
+{% extends 'store/base_templates/base.html' %}
+{% block title %}Результат(ы){% endblock %}
+{% block content %}
+    <div class="container">
+        {% for book in books %}
+            {% include 'store/includes/card.html' %}
+        {% endfor %}
+    </div>
+{% endblock %}
