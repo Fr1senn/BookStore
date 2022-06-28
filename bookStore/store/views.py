@@ -106,6 +106,4 @@ class SearchView(ListView):
 
     def get_queryset(self):
         return models.Book.objects\
-            .filter(title__icontains=self.request.GET.get('search_input'))\
-            .prefetch_related('genres')\
-            .prefetch_related('authors')
+            .filter(title__icontains=self.request.GET.get('search_input'))
