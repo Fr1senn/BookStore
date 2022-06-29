@@ -17,29 +17,28 @@
     {% block content %}
     {% endblock %}
     {% if page_obj.has_other_pages %}
-        <div class="paginator">
+        <ul class="pagination justify-content-center">
             {% if page_obj.has_previous %}
-                <div class="paginator_item">
-                    <a class="text-decoration-none text-dark" href="?page={{ page_obj.previous_page_number }}">&lt;</a>
-                </div>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+                </li>
             {% endif %}
             {% for item in page_obj.paginator.page_range %}
                 {% if page_obj.number == item %}
-                    <div class="paginator_item">
-                        <a class="text-decoration-none" style="color: white; background-color: black" href="?page={{ item }}">{{ item }}</a>
-                    </div>
+                    <li class="page-item active">
+                        <a class="page-link" href="?page={{ item }}">{{ item }}</a>
+                    </li>
                 {% elif item >= page_obj.number|add:-2 and item <= page_obj.number|add:2 %}
-                    <div class="paginator_item">
-                        <a class="text-decoration-none text-dark" href="?page={{ item }}">{{ item }}</a>
-                    </div>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ item }}">{{ item }}</a></li>
                 {% endif %}
             {% endfor %}
             {% if page_obj.has_next %}
-                <div class="paginator_item">
-                    <a class="text-decoration-none text-dark" href="?page={{ page_obj.next_page_number }}">&gt;</a>
-                </div>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следущая</a>
+                </li>
             {% endif %}
-        </div>
+        </ul>
     {% endif %}
 </div>
 {% include 'store/includes/footer.html' %}
