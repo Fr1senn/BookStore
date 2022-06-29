@@ -61,6 +61,12 @@ class BookDetail(DetailView):
     model = models.Book
     context_object_name = 'book'
 
+    def get_queryset(self):
+        return models.Book.objects\
+            .filter(slug=self.kwargs.get('slug'))\
+            .prefetch_related('genres')\
+            .prefetch_related('authors')
+
 
 class RegistrationView(CreateView):
     template_name = 'registration/registration.html'
