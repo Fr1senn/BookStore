@@ -1,30 +1,36 @@
 {% load static %}
 <footer class="footer">
     <div class="container">
-        <div class="footer_inner">
-            <a href="{% url 'catalog' %}" class="logo">BOOK-STORE</a>
-            <ul>
-                <li>
-                    <a href="https://www.facebook.com" target="_blank">
-                        <img width="35px" height="35px" src="{% static 'store/images/social/facebook.svg' %}" alt="">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="{% url 'catalog' %}" class="fw-bold fs-4 text-decoration-none text-dark me-3">
+                    BOOK-STORE
+                </a>
+                <span class="mb-3 mb-md-0 text-muted">© 2022 Company, Inc</span>
+            </div>
+
+            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                <li class="ms-3">
+                    <a class="text-muted" href="#" target="_blank">
+                        <img src="{% static 'store/images/social/youtube.svg' %}" style="width: 32px; height: 32px;">
                     </a>
                 </li>
-                <li>
-                    <a href="https://twitter.com" target="_blank">
-                        <img width="35px" height="35px" src="{% static 'store/images/social/twitter.svg' %}" alt="">
+                <li class="ms-3">
+                    <a class="text-muted" href="#" target="_blank">
+                        <img src="{% static 'store/images/social/twitter.svg' %}" style="width: 32px; height: 32px;">
                     </a>
                 </li>
-                <li>
-                    <a href="https://www.instagram.com" target="_blank">
-                        <img width="35px" height="35px" src="{% static 'store/images/social/instagram.svg' %}" alt="">
+                <li class="ms-3">
+                    <a class="text-muted" href="#" target="_blank">
+                        <img src="{% static 'store/images/social/instagram.svg' %}" style="width: 32px; height: 32px;">
                     </a>
                 </li>
-                <li>
-                    <a href="https://www.youtube.com" target="_blank">
-                        <img width="35px" height="35px" src="{% static 'store/images/social/youtube.svg' %}" alt="">
+                <li class="ms-3">
+                    <a class="text-muted" href="#" target="_blank">
+                        <img src="{% static 'store/images/social/facebook.svg' %}" style="width: 32px; height: 32px;">
                     </a>
                 </li>
             </ul>
-        </div>
+        </footer>
     </div>
 </footer>

@@ -2,26 +2,32 @@
 {% block title %}Авторизация{% endblock %}
 {% block content %}
     <div class="container">
-        <h2>Авторизация</h2>
+        <h2 class="text-center my-3">Авторизация</h2>
         <hr>
         <div class="login_inner">
-            <form method="post">
+            <form class="w-25 mx-auto" method="post">
                 {% csrf_token %}
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
                 {% for item in form %}
                     {% if item.errors %}
-                        <div class="errors">
-                            {{ item.errors }}
-                        </div>
+                        {{ item.errors }}
                     {% endif %}
-                    <label for="{{ item.id_for_label }}">{{ item.label }}</label>
-                    {{ item }}
+                    <div class="my-2">
+                        <label class="form-label" for="{{ item.id_for_label }}">{{ item.label }}</label>
+                        {{ item }}
+                    </div>
                 {% endfor %}
-                <button type="submit">Авторизоваться</button>
+                <button class="btn btn-primary my-3" type="submit">Авторизация</button>
             </form>
-            <p style="text-align:center; margin: 10px 0;">Ещё нет аккаунта?
-                <a style="color: blue; text-decoration:underline;" href="{% url 'registration' %}">
-                    Зарегистрируйтесь!
-                </a>
+            <p class="text-center">Ещё нет аккаунта? <a href="{% url 'registration' %}">Зарегистрируйтесь!</a>
             </p>
         </div>
     </div>

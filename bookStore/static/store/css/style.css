@@ -1,13 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 *,
 *::after,
 *::before {
-    font-family: 'Open Sans', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    outline: none;
+    font-family: 'Montserrat', sans-serif;
 }
 
 html, body {
@@ -17,67 +13,6 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-}
-
-a {
-    text-decoration: none;
-    color: black;
-}
-
-h2 {
-    font-size: 44px;
-    text-align: center;
-    margin: 10px 0;
-}
-
-label {
-    display: block;
-    text-align: center;
-    margin: 10px 0;
-    font-weight: 500;
-    font-size: 20px;
-}
-
-input {
-    width: 15%;
-    display: block;
-    margin: 10px auto;
-    padding: 3px 5px;
-    border: 2px solid black;
-    font-weight: 500;
-}
-
-textarea {
-    display: block;
-    margin: 10px auto;
-    border: 2px solid black;
-    font-weight: 500;
-    font-size: 16px;
-    max-width: 1300px;
-}
-
-select{
-    display: block;
-    margin: 10px auto;
-    border: 2px solid black;
-}
-
-button {
-    display: block;
-    margin: 10px auto;
-    border: 2px solid black;
-    border-radius: 5px;
-    padding: 4px 6px;
-    cursor: pointer;
-    background-color: transparent;
-    font-weight: 500;
-    font-size: 18px;
-}
-
-button:hover {
-    transition: .2s;
-    background-color: black;
-    color: white;
 }
 
 .table {
@@ -142,90 +77,3 @@ button:hover {
 .content {
     flex-grow: 1;
 }
-
-.container {
-    max-width: 1300px;
-    width: 100%;
-    margin: 0 auto;
-}
-
-.errors {
-    width: 50%;
-    border: 1px solid red;
-    margin: 20px auto;
-    padding: 10px 0;
-    background-color: rgba(139, 0, 0);
-    color: white;
-    text-align: center;
-    font-size: 18px;
-    font-weight: 500;
-}
-
-/* HEADER */
-
-.header,
-.footer {
-    background-color: skyblue;
-}
-
-.header_inner,
-.footer_inner {
-    padding: 15px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-weight: 700;
-    font-size: 22px;
-}
-
-.menu {
-    list-style: none;
-    display: flex;
-}
-
-.menu_item {
-    margin: 0 15px;
-}
-
-.menu_item-link {
-    font-weight: 500;
-    font-size: 20px;
-}
-
-.login {
-    font-weight: 500;
-    font-size: 20px;
-    border: 2px solid black;
-    border-radius: 5px;
-    padding: 3px 5px;
-}
-
-.login:hover {
-    background-color: black;
-    color: skyblue;
-    transition: .2s;
-}
-
-/* HEADER */
-
-/* FOOTER */
-
-.footer_inner ul {
-    display: flex;
-    align-items: center;
-    list-style: none;
-}
-
-.footer_inner ul li {
-    margin: 0 15px;
-}
-
-.footer_inner ul li:hover {
-    transform: scale(1.25);
-    transition: .2s;
-}
-
-/* FOOTER */

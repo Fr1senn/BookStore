@@ -3,48 +3,14 @@
 {% block title %}Каталог{% endblock %}
 {% block content %}
     <div class="container">
-        <h2>Каталог</h2>
+        <h2 class="text-center my-3">Каталог</h2>
         <hr>
         <div class="catalog_inner">
-            <div class="catalog_sidebar">
-                <h3>Жанры</h3>
-                <hr>
-                <div class="genres">
-                    {% for genre in genres %}
-                        {% if genre.slug in request.path %}
-                            <a style="color: white; background-color: black"
-                               href="{{ genre.get_absolute_url }}">{{ genre.title }}</a>
-                        {% else %}
-                            <a href="{{ genre.get_absolute_url }}">{{ genre.title }}</a>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-                <h3>Авторы</h3>
-                <hr>
-                <div class="authors">
-                    {% for author in authors %}
-                        {% if author.slug in request.path %}
-                            <a style="color: white; background-color: black"
-                               href="{{ author.get_absolute_url }}">{{ author.first_name }} {{ author.last_name }}</a>
-                        {% else %}
-                            <a href="{{ author.get_absolute_url }}">{{ author.first_name }} {{ author.last_name }}</a>
-                        {% endif %}
-
-                    {% endfor %}
-                </div>
-                <div>
-                    <form class="searchbar_wrapper" action="{% url 'search' %}" method="get">
-                        {% csrf_token %}
-                        <input name="search_input" type="text" placeholder="Поиск...">
-                        <button type="submit">Поиск</button>
-                    </form>
-                </div>
-            </div>
-            <div class="catalog_content">
+            <section class="d-flex flex-wrap justify-content-center">
                 {% for book in books %}
                     {% include 'store/includes/card.html' %}
                 {% endfor %}
-            </div>
+            </section>
         </div>
     </div>
 {% endblock %}
