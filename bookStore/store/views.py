@@ -78,10 +78,6 @@ class RegistrationView(CreateView):
         login(self.request, user)
         return redirect('home')
 
-    def get(self, request, *args, **kwargs):
-        if self.request.user.is_authenticated:
-            return redirect('catalog')
-
 
 class LogInView(LoginView):
     template_name = 'registration/login.html'
