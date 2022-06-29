@@ -9,9 +9,9 @@
                 <li><a href="{% url 'reviews' %}" class="nav-link px-2 text-white">Отзывы</a></li>
             </ul>
 
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                <input type="search" class="form-control form-control-dark text-white bg-dark"
-                       placeholder="Поиск..." aria-label="Search">
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" method="get" action="{% url 'search' %}">
+                {% csrf_token %}
+                <input name="search_input" type="search" class="form-control form-control-dark text-white bg-dark" placeholder="Поиск..." aria-label="Search">
             </form>
             {% if user.is_authenticated %}
                 <div class="d-flex align-items-center">

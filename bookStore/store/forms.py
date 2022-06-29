@@ -19,12 +19,15 @@ class RegistrationForm(UserCreationForm):
 
 
 class LoginForm(AuthenticationForm):
-    username = forms.CharField(label='Имя пользователя')
+    username = forms.CharField(label='Имя пользователя', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
 
 class ReviewForm(forms.ModelForm):
-    text = forms.CharField(label='Отзыв', widget=forms.Textarea())
+    text = forms.CharField(label='Отзыв', widget=forms.Textarea(attrs={
+        'class': 'form-control',
+        'maxlength': '250',
+    }))
 
     class Meta:
         model = models.Review
