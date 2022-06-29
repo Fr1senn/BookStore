@@ -23,16 +23,10 @@ class ReviewsView(ListView):
 class CatalogView(ListView):
     template_name = 'store/catalog.html'
     context_object_name = 'books'
-    paginate_by = 4
+    paginate_by = 6
 
     def get_queryset(self):
-        return models.Book.objects.all().prefetch_related('genres').prefetch_related('authors')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['authors'] = models.Author.objects.all()
-        context['genres'] = models.Genre.objects.all()
-        return context
+        return models.Book.objects.all()
 
 
 class CreateReviewView(LoginRequiredMixin, CreateView):
@@ -78,10 +72,14 @@ class RegistrationView(CreateView):
         login(self.request, user)
         return redirect('home')
 
+    def get(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return redirect('catalog')
+
 
 class LogInView(LoginView):
     template_name = 'registration/login.html'
-    form_class = forms.LoginForm
+    authentication_form = forms.LoginForm
 
     def get_success_url(self):
         return reverse_lazy('home')
@@ -105,5 +103,5 @@ class SearchView(ListView):
     context_object_name = 'books'
 
     def get_queryset(self):
-        return models.Book.objects\
+        return models.Book.objects \
             .filter(title__icontains=self.request.GET.get('search_input'))
