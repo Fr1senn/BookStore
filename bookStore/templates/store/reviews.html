@@ -3,21 +3,18 @@
 {% block title %}Отзывы{% endblock %}
 {% block content %}
     <div class="container">
-        <div class="reviews_inner">
-            <h2>Отзывы</h2>
-            <hr>
-            {% for review in reviews %}
-                <div class="reviews_item">
-                    <div class="review_img-wrapper">
-                        <img src="{% static 'store/images/user.svg' %}" alt="user_icon">
-                    </div>
-                    <div class="review_content-wrapper">
-                        <h3>{{ review.user__first_name }} {{ review.user__last_name }}</h3>
-                        <h6>{{ review.writing_date|date:'d F Y H:i'|lower }}</h6>
-                        <p>{{ review.text }}</p>
-                    </div>
+        {% for review in reviews %}
+            <div class="card text-center w-50 mx-auto my-3">
+                <div class="card-header">
+                    <h3 class="fs-5">{{ review.user__first_name }} {{ review.user__last_name }}</h3>
                 </div>
-            {% endfor %}
-        </div>
+                <div class="card-body">
+                    <p class="card-text fst-italic">- {{ review.text }}</p>
+                </div>
+                <div class="card-footer text-muted">
+                    {{ review.writing_date }}
+                </div>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}

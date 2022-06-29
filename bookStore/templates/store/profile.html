@@ -3,55 +3,43 @@
 {% block title %}Кабинет{% endblock %}
 {% block content %}
     <div class="container">
-        <h2>Личный кабинет</h2>
+        <h2 class="text-center my-3">Личный кабинет</h2>
         <hr>
-        <div class="profile_inner">
-            <div class="profile_info">
-                <div class="profile_img-wrapper">
-                    <img src="{% static 'store/images/user.svg' %}" alt="user_icon">
-                </div>
-                <div class="profile_content-wrapper">
-                    <h3 style="text-align:center; margin: 10px;">
-                        {{ user.first_name }} "{{ user.username }}" {{ user.last_name }}
-                    </h3>
-                    <hr>
-                    <h3 style="margin: 5px">
-                        Email: <span>{{ user.email }}</span>
-                    </h3>
-                    <h3 style="margin: 5px">
-                        Дата регистрации: <span>{{ user.date_joined }}</span>
-                    </h3>
-                    <a style="text-decoration: underline; color: blue; margin: 5px" href="{% url 'create_review' %}">
-                        Оставить отзыв
-                    </a>
-                </div>
+        <section class="w-50 mx-auto border border-dark d-flex">
+            <div class="w-25">
+                <img src="{% static 'store/images/user.svg' %}" alt="">
             </div>
-        </div>
+            <div class="w-75">
+                <h3 class="text-center my-2">{{ user.first_name }} "{{ user.username }}" {{ user.last_name }}</h3>
+                <h4>
+                    Дата регистрации: <span class="fw-normal fst-italic">{{ user.date_joined|date:'d b. Y' }}</span>
+                </h4>
+                <h4>Email: <span class="fw-normal fst-italic">{{ user.email }}</span></h4>
+                <a href="{% url 'create_review' %}">Оставить отзыв</a>
+            </div>
+        </section>
         <hr>
-        <h2>История покупок</h2>
+        <h2 class="text-center my-3">История покупок</h2>
         <hr>
-        <div class="orders_inner">
-            <table class="table">
+        <section class="w-75 mx-auto">
+            <table class="table table-striped w-100 ">
                 <thead>
-                <tr>
-                    <th>Книга</th>
-                    <th>Цена</th>
-                    <th>Дата покупки</th>
-                </tr>
+                    <tr>
+                        <th class="col">Книга</th>
+                        <th class="col">Цена</th>
+                        <th class="col">Дата покупки</th>
+                    </tr>
                 </thead>
                 <tbody>
-                {% for order in orders %}
-                    <tr>
-                        <th>
-                            <a style="text-decoration:underline; color: blue;"
-                               href="{{ order.book.get_absolute_url }}">{{ order.book }}</a>
-                        </th>
-                        <th>{{ order.book.price }} ₴</th>
-                        <th>{{ order.purchase_date }}</th>
-                    </tr>
-                {% endfor %}
+                    {% for order in orders %}
+                        <tr>
+                            <th class="w-50"><a href="{{ order.book.get_absolute_url }}">{{ order.book }}</a></th>
+                            <th class="w-25">{{ order.book.price }} ₴</th>
+                            <th class="w-25">{{ order.purchase_date }}</th>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
-        </div>
+        </section>
     </div>
 {% endblock %}
