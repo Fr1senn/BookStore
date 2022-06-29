@@ -3,19 +3,27 @@
 {% block title %}{{ book.title }}{% endblock %}
 {% block content %}
     <div class="container">
-        <h2>{{ book.title }}</h2>
-        <hr>
-        <div class="book_inner">
-            <div class="book_img-wrapper">
+        <section class="d-flex">
+            <div class="w-50">
                 <img src="{% static 'store/images/book.svg' %}" alt="">
             </div>
-            <hr>
-            <div class="book_content-wrapper">
-                <h3>Жанр(ы): {% for genre in book.genres.all %}<p>{{ genre }}</p>{% endfor %}</h3>
-                <h3>Автор(ы): {% for author in book.authors.all %}<p>{{ author }}</p>{% endfor %}</h3>
-                <h3>Описание: {% if book.description != None %}<p>{{ book.description }}</p>{% endif %}</h3>
-                <h3>Цена: {{ book.price }} ₴</h3>
+            <div class="w-50">
+                <h2 class="text-center my-2">{{ book.title }}</h2>
+                <hr>
+                <h3 class="mb-0">Жанр(ы):</h3>
+                {% for genre in book.genres.all %}
+                    <p class="fs-4 my-1 fst-italic">{{ genre }}</p>
+                {% endfor %}
+                <h3 class="mb-0">Автор(ы):</h3>
+                {% for author in book.authors.all %}
+                    <p class="fs-4 my-1 fst-italic">{{ author }}</p>
+                {% endfor %}
+                <h3 class="mb-0">Цена:</h3>
+                <p class="fs-4 my-1 fst-italic">{{ book.price }} ₴</p>
+                <h3 class="mb-0">Описание:</h3>
+                <p class="fs-5 fst-italic">{{ book.description }}</p>
             </div>
-        </div>
+        </section>
     </div>
+
 {% endblock %}
