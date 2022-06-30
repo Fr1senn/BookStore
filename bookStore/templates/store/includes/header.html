@@ -7,20 +7,56 @@
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="{% url 'reviews' %}" class="nav-link px-2 text-white">Отзывы</a></li>
+                <li class="mx-2">
+                    <div class="dropdown-center">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">Авторы
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"
+                            style="height: 138px; overflow-y: auto">
+                            {% for author in authors %}
+                                <li>
+                                    <a class="dropdown-item" href="{{ author.get_absolute_url }}">
+                                        {{ author.first_name }} {{ author.last_name }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </li>
+                <li class="mx-2">
+                    <div class="dropdown-center">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">Жанры
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"
+                            style="height: 138px; overflow-y: auto">
+                            {% for genre in genres %}
+                                <li>
+                                    <a class="dropdown-item" href="{{ genre.get_absolute_url }}">
+                                        {{ genre.title }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </li>
             </ul>
 
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" method="get" action="{% url 'search' %}">
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" method="get"
+                  action="{% url 'search' %}">
                 {% csrf_token %}
-                <input name="search_input" type="search" class="form-control form-control-dark text-white bg-dark" placeholder="Поиск..." aria-label="Search">
+                <input name="search_input" type="search" class="form-control form-control-dark text-white bg-dark"
+                       placeholder="Поиск..." aria-label="Search">
             </form>
             {% if user.is_authenticated %}
                 <div class="d-flex align-items-center">
-                    <a class="mx-3" href="{% url 'profile' %}">{{ user.username }}</a>
-                    <a class="btn btn-outline-warning" href="{% url 'logout' %}">Выйти</a>
+                    <a class="mx-3 link-light" href="{% url 'profile' %}">{{ user.username }}</a>
+                    <a class="btn btn-outline-light" href="{% url 'logout' %}">Выйти</a>
                 </div>
             {% else %}
                 <div class="text-end">
-                    <a class="btn btn-outline-primary" href="{% url 'login' %}">Войти</a>
+                    <a class="btn btn-outline-light" href="{% url 'login' %}">Войти</a>
                 </div>
             {% endif %}
 
