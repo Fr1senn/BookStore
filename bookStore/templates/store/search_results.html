@@ -2,8 +2,10 @@
 {% block title %}Результат(ы){% endblock %}
 {% block content %}
     <div class="container">
-        {% for book in books %}
-            {% include 'store/includes/card.html' %}
-        {% endfor %}
+        <section class="d-flex flex-wrap justify-content-center">
+            {% for book in books %}
+                {% include 'store/includes/card.html' %}
+            {% endfor %}
+        </section>
     </div>
 {% endblock %}
