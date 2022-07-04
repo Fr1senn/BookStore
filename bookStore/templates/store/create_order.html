@@ -1,0 +1,14 @@
+{% extends 'store/base_templates/base.html' %}
+{% block title %}Создать заказ{% endblock %}
+{% block content %}
+    <div class="container">
+        <form class="w-50 mx-auto" method="post">
+            {% csrf_token %}
+            {% for item in form %}
+                <label class="form-label" for="{{ item.id_for_label }}">{{ item.label }}</label>
+                {{ item }}
+            {% endfor %}
+            <button class="btn btn-success my-3" type="submit">Приобрести</button>
+        </form>
+    </div>
+{% endblock %}

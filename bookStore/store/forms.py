@@ -32,3 +32,15 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = models.Review
         fields = ('text',)
+
+
+class OrderForm(forms.ModelForm):
+    book = forms.ModelChoiceField(
+        queryset=models.Book.objects.all(),
+        label='Книга',
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+
+    class Meta:
+        model = models.Order
+        fields = ('book',)

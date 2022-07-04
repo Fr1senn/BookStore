@@ -15,7 +15,8 @@
                     Дата регистрации: <span class="fw-normal fst-italic">{{ user.date_joined|date:'d b. Y' }}</span>
                 </h4>
                 <h4>Email: <span class="fw-normal fst-italic">{{ user.email }}</span></h4>
-                <a href="{% url 'create_review' %}">Оставить отзыв</a>
+                <a href="{% url 'create_review' %}">Оставить отзыв</a><br>
+                <a href="{% url 'create_order' %}">Приобрести книгу</a>
             </div>
         </section>
         <hr>
@@ -24,20 +25,20 @@
         <section class="w-75 mx-auto">
             <table class="table table-striped w-100 ">
                 <thead>
-                    <tr>
-                        <th class="col">Книга</th>
-                        <th class="col">Цена</th>
-                        <th class="col">Дата покупки</th>
-                    </tr>
+                <tr>
+                    <th class="col">Книга</th>
+                    <th class="col">Цена</th>
+                    <th class="col">Дата покупки</th>
+                </tr>
                 </thead>
                 <tbody>
-                    {% for order in orders %}
-                        <tr>
-                            <th class="w-50"><a href="{{ order.book.get_absolute_url }}">{{ order.book }}</a></th>
-                            <th class="w-25">{{ order.book.price }} ₴</th>
-                            <th class="w-25">{{ order.purchase_date }}</th>
-                        </tr>
-                    {% endfor %}
+                {% for order in orders %}
+                    <tr>
+                        <th class="w-50"><a href="{{ order.book.get_absolute_url }}">{{ order.book }}</a></th>
+                        <th class="w-25">{{ order.book.price }} ₴</th>
+                        <th class="w-25">{{ order.purchase_date }}</th>
+                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </section>

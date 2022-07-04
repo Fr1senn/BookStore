@@ -62,9 +62,9 @@ class BookDetail(DetailView):
     context_object_name = 'book'
 
     def get_queryset(self):
-        return models.Book.objects\
-            .filter(slug=self.kwargs.get('slug'))\
-            .prefetch_related('genres')\
+        return models.Book.objects \
+            .filter(slug=self.kwargs.get('slug')) \
+            .prefetch_related('genres') \
             .prefetch_related('authors')
 
 
@@ -88,8 +88,8 @@ class LogInView(LoginView):
 
 
 class ProfileView(LoginRequiredMixin, TemplateView):
-    login_url = '/login'
     template_name = 'store/profile.html'
+    login_url = '/login'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -107,3 +107,13 @@ class SearchView(ListView):
     def get_queryset(self):
         return models.Book.objects \
             .filter(title__icontains=self.request.GET.get('search_input'))
+
+
+class CreateOrderView(CreateView):
+    template_name = 'store/create_order.html'
+    form_class = forms.OrderForm
+    success_url = reverse_lazy('profile')
+
+    def form_valid(self, form):
+        form.instance.user_id = self.request.user.id
+        return super(self.__class__, self).form_valid(form)
